@@ -1,0 +1,37 @@
+<form [formGroup]="addressForm" novalidate (ngSubmit)="onSubmit()">
+  <mat-card class="shipping-card">
+    <mat-card-header>
+      <mat-card-title>Nueva Mascota</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Nombre" formControlName="Nombre">
+            <mat-error *ngIf="addressForm.controls['Nombre'].hasError('required')">
+              El Nombre <strong>requerido</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field>
+            <mat-label>Tipo</mat-label>
+            <mat-select formControlName="Tipo">
+              <mat-option value="Perro">Perro</mat-option>
+              <mat-option value="Gato">Gato</mat-option>
+              <mat-option value="Ave">Ave</mat-option>
+              <mat-option value="Reptil">Reptil</mat-option>
+              <mat-option value="Otro">Otro</mat-option>
+            </mat-select>
+            <mat-error *ngIf="addressForm.controls['Nombre'].hasError('required')">
+              El Nombre <strong>requerido</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" type="submit">Enviar</button>
+    </mat-card-actions>
+  </mat-card>
+</form>
