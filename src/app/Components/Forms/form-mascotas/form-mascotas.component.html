@@ -7,8 +7,8 @@
       <div class="row">
         <div class="col">
           <mat-form-field class="full-width">
-            <input matInput placeholder="Nombre" formControlName="Nombre">
-            <mat-error *ngIf="addressForm.controls['Nombre'].hasError('required')">
+            <input matInput placeholder="Nombre" formControlName="Nombres">
+            <mat-error *ngIf="addressForm.controls['Nombres'].hasError('required')">
               El Nombre <strong>requerido</strong>
             </mat-error>
           </mat-form-field>
@@ -23,8 +23,8 @@
               <mat-option value="Reptil">Reptil</mat-option>
               <mat-option value="Otro">Otro</mat-option>
             </mat-select>
-            <mat-error *ngIf="addressForm.controls['Nombre'].hasError('required')">
-              El Nombre <strong>requerido</strong>
+            <mat-error *ngIf="addressForm.controls['Tipo'].hasError('required')">
+              El Tipo <strong>requerido</strong>
             </mat-error>
           </mat-form-field>
         </div>

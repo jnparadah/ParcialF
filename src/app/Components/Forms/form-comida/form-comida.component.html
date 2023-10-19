@@ -15,7 +15,7 @@
         </div>
         <div class="col">
           <mat-form-field class="full-width">
-            <input matInput placeholder="Cantidad" formControlName="Cantidad">
+            <input matInput type="number" placeholder="Cantidad" formControlName="Cantidad">
             <mat-error *ngIf="addressForm.controls['Cantidad'].hasError('required')">
               La Cantidad es <strong>requerida</strong>
             </mat-error>
