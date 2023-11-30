@@ -6,7 +6,6 @@ import { ModalService } from 'src/app/Services/Modal/modal.service';
 import { ApiService } from 'src/app/Services/api.service';
 import Swal from 'sweetalert2'
 
-
 @Component({
   selector: 'app-form-mascotas',
   templateUrl: './form-mascotas.component.html',
@@ -17,7 +16,7 @@ export class FormMascotasComponent {
   constructor(
     public apiService: ApiService,
     public dialog: MatDialog,
-    public ModalService: ModalService
+    public modalService: ModalService
     ){
     
   }
@@ -33,28 +32,29 @@ export class FormMascotasComponent {
   });
 
   infMascotas: MascotasModels = {
+    IdMascota: 0,
     NombreMascota: "",
     TipoAnimal: ""
   }
 
-  ngOnInit(): void {
-    this.titulo = this.ModalService.titulo;
-    this.accion = this.ModalService.accion.value;
+  ngOnInit(): void{
+    this.titulo = this.modalService.titulo;
+    this.accion = this.modalService.accion.value;
 
-    if (this.ModalService.accion.value == "Editar") {
+    if (this.modalService.accion.value == "Editar") {
       this.addressForm.controls.Nombres.setValue(
-        this.ModalService.mascotas['nombre']
+        this.modalService.mascotas['nombre']
       );
       this.addressForm.controls.Tipo.setValue(
-        this.ModalService.mascotas['tipo']
+        this.modalService.mascotas['tipo']
       );
     }
   }
 
   onSubmit(): void {
-    this.titulo = this.ModalService.titulo
-    this.accion = this.ModalService.accion.value
-    if (this.ModalService.accion.value == "Guardar") {
+    this.titulo = this.modalService.titulo
+    this.accion = this.modalService.accion.value
+    if (this.modalService.accion.value == "Guardar") {
       if (this.addressForm.valid) {
         this.infMascotas.NombreMascota = this.addressForm.controls['Nombres'].value;
         this.infMascotas.TipoAnimal = this.addressForm.controls['Tipo'].value;
@@ -85,11 +85,12 @@ export class FormMascotasComponent {
       }
     }else {
       if (this.addressForm.valid) {
+        this.infMascotas.IdMascota = this.modalService.mascotas['id'];
         this.infMascotas.NombreMascota = this.addressForm.controls['Nombres'].value;
         this.infMascotas.TipoAnimal = this.addressForm.controls['Tipo'].value;
         
         this.dialog.closeAll();
-        this.apiService.update('Mascotas', this.infMascotas, String(this.ModalService.mascotas['id'])).then(res => {
+        this.apiService.update('Mascotas', this.infMascotas, Number(this.modalService.mascotas['id'])).then(res => {
           if (res == undefined) {
             Swal.fire({
               title: 'Edicion Realizada',

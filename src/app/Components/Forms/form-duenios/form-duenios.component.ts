@@ -17,7 +17,7 @@ export class FormDueniosComponent {
   constructor(
     public apiService: ApiService,
     public dialog: MatDialog,
-    public ModalService: ModalService
+    public modalService: ModalService
   ) {
 
   }
@@ -32,28 +32,29 @@ export class FormDueniosComponent {
   });
 
   infDuenios: DueniosModels = {
+    IdDueño: 0,
     NombreDueño: "",
     Edad: 0
   }
 
   ngOnInit(): void {
-    this.titulo = this.ModalService.titulo;
-    this.accion = this.ModalService.accion.value;
+    this.titulo = this.modalService.titulo;
+    this.accion = this.modalService.accion.value;
 
-    if (this.ModalService.accion.value == "Editar") {
+    if (this.modalService.accion.value == "Editar") {
       this.addressForm.controls.Nombre.setValue(
-        this.ModalService.duenios['nombre']
+        this.modalService.duenios['nombre']
       );
       this.addressForm.controls.Edad.setValue(
-        this.ModalService.duenios['edad']
+        this.modalService.duenios['edad']
       );
     }
   }
 
   onSubmit(): void {
-    this.titulo = this.ModalService.titulo
-    this.accion = this.ModalService.accion.value
-    if (this.ModalService.accion.value == "Guardar") {
+    this.titulo = this.modalService.titulo
+    this.accion = this.modalService.accion.value
+    if (this.modalService.accion.value == "Guardar") {
       if (this.addressForm.valid) {
         this.infDuenios.NombreDueño = this.addressForm.controls['Nombre'].value;
         this.infDuenios.Edad = this.addressForm.controls['Edad'].value;
@@ -71,7 +72,7 @@ export class FormDueniosComponent {
         }).catch(error => {
           Swal.fire(
             `Status error ${error.status}`,
-            `Message: ${error.message}`,
+            `message: ${error.message}`,
             `error`
           )
         })
@@ -84,11 +85,12 @@ export class FormDueniosComponent {
       }
     } else {
       if (this.addressForm.valid) {
+        this.infDuenios.IdDueño = this.modalService.duenios['id'];
         this.infDuenios.NombreDueño = this.addressForm.controls['Nombre'].value;
         this.infDuenios.Edad = this.addressForm.controls['Edad'].value;
         
         this.dialog.closeAll();
-        this.apiService.update('Duenios', this.infDuenios, String(this.ModalService.duenios['id'])).then(res => {
+        this.apiService.update('Duenios', this.infDuenios, Number(this.modalService.duenios['id'])).then(res => {
           if (res == undefined) {
             Swal.fire({
               title: 'Edicion Realizada',

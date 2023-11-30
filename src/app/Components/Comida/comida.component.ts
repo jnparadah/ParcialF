@@ -57,7 +57,7 @@ export class ComidaComponent implements OnInit {
           if (res == undefined) {
               Swal.fire({
                 title: 'Eliminación Realizada',
-                text: 'La Comida ha sido eliminado',
+                text: 'La Comida ha sido eliminada',
                 icon: 'success',
                 color: '#7b1fa2',
               })
@@ -82,13 +82,13 @@ export class ComidaComponent implements OnInit {
 
   openDialog() {
     this.ModalService.accion.next("Guardar")
-    this.ModalService.titulo = "Nueva Comida"
+    this.ModalService.titulo = "Nueva"
     this.dialog.open(FormComidaComponent, {});
   }
 
   editarRegistro(element: any){
     this.ModalService.accion.next("Editar");
-    this.ModalService.titulo = "Editar Comida"
+    this.ModalService.titulo = "Editar"
     this.ModalService.comida = element
     this.dialog.open(FormComidaComponent, {})
   }

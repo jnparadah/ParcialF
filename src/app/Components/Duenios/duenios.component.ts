@@ -83,13 +83,13 @@ export class DueniosComponent implements OnInit {
 
   openDialog() {
     this.ModalService.accion.next("Guardar")
-    this.ModalService.titulo = "Nuevo Dueño"
+    this.ModalService.titulo = "Nuevo"
     this.dialog.open(FormDueniosComponent, {});
   }
 
   editarRegistro(element: any){
     this.ModalService.accion.next("Editar");
-    this.ModalService.titulo = "Editar Dueño"
+    this.ModalService.titulo = "Editar"
     this.ModalService.duenios = element
     this.dialog.open(FormDueniosComponent, {})
   }

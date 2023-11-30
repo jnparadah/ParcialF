@@ -21,15 +21,15 @@ export class ApiService {
   }
 
   public async post(gatewayController: string, body: any) {
-    return await this.api.post(this.apiUrl + gatewayController, body).toPromise().then((res) => { })
+    return await this.api.post(this.apiUrl + gatewayController, body).toPromise().then((res) => {})
   }
 
   public async delete(gatewayController: string, idBody: string) {
-    return await this.api.delete(this.apiUrl + gatewayController + '/' + idBody);
+    return await this.api.delete(this.apiUrl + gatewayController + '/' + idBody).toPromise().then((res) => {});
   }
 
-  public async update(gatewayController: string, body: any, idBody: string) {
-    return await this.api.put(this.apiUrl + gatewayController + '/' + idBody, body);
+  public async update(gatewayController: string, body: any, idBody: number) {
+    return await this.api.put(this.apiUrl + gatewayController + '/' + idBody, body).toPromise().then((res) => {}) ;
   }
 
 }

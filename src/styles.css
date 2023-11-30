@@ -46,3 +46,37 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   .btn-new:hover {
     background-color: #4550a0; /* Cambiar color de fondo al pasar sobre el botón */
   }
+
+  .btn-edit {
+    padding: 2% 3%;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 10%;
+    cursor: pointer;
+  }
+
+  .btn-edit:hover {
+    background-color: #45a049;
+  }
+
+  .btn-edit:active {
+    background-color: #3e8e41;
+  }
+
+  .btn-del {
+    padding: 2% 3%;
+    background-color: #9b2b23;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .btn-del:hover {
+    background-color: #97241c;
+  }
+
+  .btn-del:active {
+    background-color: #3e8e41;
+  }

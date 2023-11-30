@@ -81,13 +81,13 @@ export class MascotasComponent implements OnInit {
 
   openDialog() {
     this.ModalService.accion.next("Guardar")
-    this.ModalService.titulo = "Nueva Mascota"
+    this.ModalService.titulo = "Nueva"
     this.dialog.open(FormMascotasComponent, {});
   }
 
   editarRegistro(element: any){
     this.ModalService.accion.next("Editar");
-    this.ModalService.titulo = "Editar Mascota"
+    this.ModalService.titulo = "Editar"
     this.ModalService.duenios = element
     this.dialog.open(FormMascotasComponent, {})
   }

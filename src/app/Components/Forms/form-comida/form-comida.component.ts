@@ -6,7 +6,6 @@ import { ModalService } from 'src/app/Services/Modal/modal.service';
 import { ApiService } from 'src/app/Services/api.service';
 import Swal from 'sweetalert2'
 
-
 @Component({
   selector: 'app-form-comida',
   templateUrl: './form-comida.component.html',
@@ -17,7 +16,7 @@ export class FormComidaComponent {
   constructor(
     public apiService: ApiService,
     public dialog: MatDialog,
-    public ModalService: ModalService
+    public modalService: ModalService
   ) {
 
   }
@@ -32,28 +31,29 @@ export class FormComidaComponent {
   });
 
   infoComida: ComidaModels = {
+    IdComida: 0,
     Cantidad: 0,
     NombreComida: ""
   }
 
   ngOnInit(): void {
-    this.titulo = this.ModalService.titulo;
-    this.accion = this.ModalService.accion.value;
+    this.titulo = this.modalService.titulo;
+    this.accion = this.modalService.accion.value;
 
-    if (this.ModalService.accion.value == "Editar") {
+    if (this.modalService.accion.value == "Editar") {
       this.addressForm.controls.Nombre.setValue(
-        this.ModalService.comida['nombre']
+        this.modalService.comida['nombre']
       );
       this.addressForm.controls.Cantidad.setValue(
-        this.ModalService.comida['cantidad']
+        this.modalService.comida['cantidad']
       );
     }
   }
 
   onSubmit(): void {
-    this.titulo = this.ModalService.titulo
-    this.accion = this.ModalService.accion.value
-    if (this.ModalService.accion.value == "Guardar") {
+    this.titulo = this.modalService.titulo
+    this.accion = this.modalService.accion.value
+    if (this.modalService.accion.value == "Guardar") {
       if (this.addressForm.valid) {
         this.infoComida.NombreComida = this.addressForm.controls['Nombre'].value;
         this.infoComida.Cantidad = this.addressForm.controls['Cantidad'].value;
@@ -84,11 +84,12 @@ export class FormComidaComponent {
       }
     } else {
       if (this.addressForm.valid) {
+        this.infoComida.IdComida = this.modalService.comida['id'];
         this.infoComida.NombreComida = this.addressForm.controls['Nombre'].value;
         this.infoComida.Cantidad = this.addressForm.controls['Cantidad'].value;
 
         this.dialog.closeAll();
-        this.apiService.update('Comidas', this.infoComida, String(this.ModalService.comida['id'])).then(res => {
+        this.apiService.update('Comidas', this.infoComida, Number(this.modalService.comida['id'])).then(res => {
           if (res == undefined) {
             Swal.fire({
               title: 'Edicion Realizada',
